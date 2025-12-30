@@ -4,13 +4,6 @@ python-multipart
 pydantic
 
 numpy
-pandas
-scikit-learn
-matplotlib
-
-opencv-python
 pillow
+opencv-python-headless
 scikit-image
-
-torch
-torchvision
