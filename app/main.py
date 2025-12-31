@@ -8,10 +8,9 @@ import os
 
 app = FastAPI()
 
-# ===== CORS FIX =====
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # React app
+    allow_origins=["*"],  # Cloud Run safe
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -24,15 +23,14 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 def root():
     return {"message": "Backend running OK"}
 
-# ✅ MATCH FRONTEND ENDPOINT
 @app.post("/analyze")
 async def analyze(file: UploadFile = File(...)):
     image_bytes = await file.read()
     np_img = np.frombuffer(image_bytes, np.uint8)
     img = cv2.imdecode(np_img, cv2.IMREAD_COLOR)
 
-    # ---- HD ENHANCE PIPELINE ----
     h, w = img.shape[:2]
+
     upscaled = cv2.resize(
         img,
         (w * 2, h * 2),
