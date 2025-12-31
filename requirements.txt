@@ -1,9 +1,7 @@
 fastapi
-uvicorn[standard]
+uvicorn
 python-multipart
-pydantic
-
-numpy
 pillow
-opencv-python-headless
-scikit-image
+numpy
+opencv-python
+scikit-learn
